@@ -41,7 +41,6 @@ var xo = {
         } else {
             this.circle(row,col);
         }
-
         this.changeTurn();
         this.displayPlayer();
     },
@@ -53,14 +52,16 @@ var xo = {
     },
     circle : function(row, col) {
         //round
-        x = 50 + (row * 100);
-        y = 50 + (col * 100);
+        var x = 50 + (row * 100);
+        var y = 50 + (col * 100);
+        var ctx = this.ctx;
         ctx.beginPath();
         ctx.arc(x,y,30,0,Math.PI*2,true); // Outer circle
         ctx.fill();
         ctx.stroke();
     },
     x : function(row, col) {
+        var ctx = this.ctx;
         ctx.beginPath(row,col);
         ctx.moveTo(20 + (row * 100),20 + (col * 100));
         ctx.lineTo(80 + (row * 100), 80 + (col * 100));
@@ -69,18 +70,18 @@ var xo = {
         ctx.moveTo(80 + (row * 100),20 + (col * 100));
         ctx.lineTo(20 + (row * 100), 80 + (col * 100));
         ctx.stroke();
-    },
+    }, 
     canvasLeft : 0,
     canvasTop : 0,
     canvas : '',
-    ctx : '',
+    ctx : {},
     matrix : [],
     turn : 0,
     users : ["X", "O"],
 
 
     init : function() {
-        pos = $('canvas').position();
+        var pos = $('canvas').position();
         this.canvasLeft = pos.left;
         this.canvasTop = pos.top;
 
@@ -93,7 +94,7 @@ var xo = {
         $('h2').html(this.users[this.turn] +  ' now');
     },
     boardDraw : function() {
-        ctx = this.ctx;
+        var ctx = this.ctx;
         ctx.fillStyle = "rgb(200,0,0)";
         ctx.strokeRect(0, 0, 300, 300)
 
@@ -123,5 +124,4 @@ var xo = {
 
     }
 }
-
 
